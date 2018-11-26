@@ -32,7 +32,7 @@ function upviddownload()
         rm -f "${infofile}" 2> /dev/null
         curl -s -c "${cookiefile}" -o "${infofile}" -L "${url}"
 
-        filename="$( cat "${infofile}" | grep '<title>' | sed -e 's/^[ \t]*//' | sed -n '/^$/!{s/<[^>]*>//g;p;}' | sed 's/ //g' )"
+        filename="$( cat "${infofile}" | grep '<title>' | sed -e 's/^[ \t]*//' | sed -n '/^$/!{s/<[^>]*>//g;p;}' | sed 's/ //g' | tr -d '\r')"
     done
 
     if [ "${retry}" -ge 10 ]; then
